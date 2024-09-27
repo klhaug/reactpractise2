@@ -17,20 +17,44 @@ function Button() {
   function handleClick() {
     setCount(count + 1)
   }
-
-
   return (
     <>
-      <button onClick={handleClick}>This is a Reactbutton with {count} clicks!</button>
+      <button onClick={handleClick}>You have submitted {count} items!</button>
     </>
   );
+}
+
+function InputFrame() {
+  return(
+    <div>
+      <input className="inputFrame"></input>
+    </div>
+  );
+}
+
+function SubmitItemBox() {
+  return(
+    <div className="submitItemBox">
+      <InputFrame />
+      <Button/>
+    </div>
+  )
+}
+
+function ItemsSubmitted() {
+  return(
+    <div className="itemsSubmitted">
+
+    </div>
+  )
 }
 
 export default function App() {
   return(
     <>
       <Header />
-      <Button />
+      <SubmitItemBox/>
+      <ItemsSubmitted/>
     </>
   )
 }
