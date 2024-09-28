@@ -19,23 +19,28 @@ function Button() {
   }
   return (
     <>
-      <button onClick={handleClick}>You have submitted {count} items!</button>
+      <button onClick={handleClick, console.log(search)}>You have submitted {count} items!</button>
     </>
   );
 }
 
-function InputFrame() {
+function InputFrame({inputSearchChange}) {
   return(
     <div>
-      <input className="inputFrame"></input>
+      <input 
+      className="inputFrame"
+      type="search"
+      onChange={inputSearchChange}
+      >  
+      </input>
     </div>
   );
 }
 
-function SubmitItemBox() {
+function SubmitItemBox({searchChange}) {
   return(
     <div className="submitItemBox">
-      <InputFrame />
+      <InputFrame inputSearchChange = {searchChange}/>
       <Button/>
     </div>
   )
@@ -49,12 +54,22 @@ function ItemsSubmitted() {
   )
 }
 
+
+
 export default function App() {
+  const [search, setSearch] = useState()
+
+ 
+const onSearchChange = (event) => {
+    setSearch({search :event.target.value})
+    // {search : event.target.value}
+  }
+
   return(
     <>
       <Header />
-      <SubmitItemBox/>
+      <SubmitItemBox searchChange = {onSearchChange}/>
       <ItemsSubmitted/>
     </>
-  )
+  ) 
 }
