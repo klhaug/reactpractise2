@@ -50,6 +50,8 @@ function SubmitItemBox({searchChange, search}) {
 }
 
 function ItemsSubmitted() {
+  const [items, setItems] = useState("")
+
   return(
     <div className="itemsSubmitted">
 
@@ -61,7 +63,7 @@ function ItemsSubmitted() {
 
 export default function App() {
   const [search, setSearch] = useState("");
-
+  
  
 const onSearchChange = (event) => {
     setSearch(event.target.value)
