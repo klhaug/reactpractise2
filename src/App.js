@@ -12,7 +12,7 @@ function Header() {
   );
 }
 
-function Button({search}) {
+function Button({search, onButtonSubmit}) {
   const [count, setCount] = useState(0);
   
 
@@ -22,7 +22,7 @@ function Button({search}) {
   }
   return (
     <>
-      <button onClick={handleClick}>You have submitted {count} items!</button>
+      <button onClick={onButtonSubmit}>You have submitted {count} items!</button>
     </>
   );
 }
@@ -40,22 +40,24 @@ function InputFrame({inputSearchChange}) {
   );
 }
 
-function SubmitItemBox({searchChange, search}) {
+function SubmitItemBox({searchChange, search, onButtonSubmit}) {
   return(
     <div className="submitItemBox">
       <InputFrame inputSearchChange = {searchChange}/>
-      <Button search={search}/>
+      <Button onButtonSubmit={onButtonSubmit} search={search}/>
     </div>
   )
 }
 
-function ItemsSubmitted() {
-  const [items, setItems] = useState("")
+function ItemsSubmitted({items}) {
+
 
   return(
-    <div className="itemsSubmitted">
-
-    </div>
+    <ol className="itemsSubmitted">
+      {items.map((item, index) => (
+        <li key={index}>{item}</li>
+      ))}
+    </ol>
   )
 }
 
@@ -63,8 +65,12 @@ function ItemsSubmitted() {
 
 export default function App() {
   const [search, setSearch] = useState("");
+  const [items, setItems] = useState([]);
   
- 
+function onButtonSubmit() {
+  setItems((items) => [...items, search])
+}
+  
 const onSearchChange = (event) => {
     setSearch(event.target.value)
   }
@@ -72,8 +78,18 @@ const onSearchChange = (event) => {
   return(
     <>
       <Header />
-      <SubmitItemBox searchChange = {onSearchChange} search={search}/>
-      <ItemsSubmitted/>
+      <SubmitItemBox onButtonSubmit={onButtonSubmit} searchChange = {onSearchChange} search={search}/>
+      <ItemsSubmitted items = {items}/>
     </>
   ) 
 }
+
+
+// Det er onclick som skal utløse at den legger til et nytt item. Derfor må funksjonen passes ned til button. 
+// Staten kan være overordnet i appen sikkert. 
+// 
+
+
+
+
+//HVA HAR JEG LÆRT?

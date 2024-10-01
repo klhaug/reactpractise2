@@ -38,7 +38,8 @@ h1 {
 
 .itemsSubmitted{
   border: 1px solid black;
-  height: 200px;
+  min-height: 200px;
   margin-top: 62px;
   border-radius: 6px;
+  padding: 21px 32px;
 }
