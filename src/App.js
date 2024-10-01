@@ -1,7 +1,6 @@
 import React from "react";
 import { useState } from "react";
 import "./App.css"
-import { click } from "@testing-library/user-event/dist/click";
 
 
 function Header() {
@@ -17,12 +16,18 @@ function Button({search, onButtonSubmit}) {
   
 
   function handleClick() {
-    setCount(count + 1)
-    console.log(search)
+    if (search.length > 0) {
+      setCount(count + 1)
+      console.log(search)
+      onButtonSubmit();
+    } else {
+      alert("Please enter information")
+    }
+
   }
   return (
     <>
-      <button onClick={onButtonSubmit}>You have submitted {count} items!</button>
+      <button onClick={handleClick}>You have submitted {count} items!</button>
     </>
   );
 }
