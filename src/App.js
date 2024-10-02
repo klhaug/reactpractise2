@@ -1,100 +1,25 @@
 import React from "react";
-import { useState } from "react";
 import "./App.css"
+import { useState } from "react";
 
+export default function App () {
+const [count, setCount] = useState(0);
+const [item, setItem] = useState([]);
+const [search, setSearch] =useState('');
 
-function Header() {
-  return(
-    <>
-      <h1>ReactPractise</h1>
-    </>
-  );
-}
-
-function Button({search, onButtonSubmit}) {
-  const [count, setCount] = useState(0);
-  
-
-  function handleClick() {
-    if (search.length > 0) {
-      setCount(count + 1)
-      console.log(search)
-      onButtonSubmit();
-    } else {
-      alert("Please enter information")
-    }
-
-  }
-  return (
-    <>
-      <button onClick={handleClick}>You have submitted {count} items!</button>
-    </>
-  );
-}
-
-function InputFrame({inputSearchChange}) {
+function MyInputBox () {
   return(
     <div>
-      <input 
-      className="inputFrame"
-      type="search"
-      onChange={inputSearchChange}
-      >  
-      </input>
-    </div>
-  );
-}
-
-function SubmitItemBox({searchChange, search, onButtonSubmit}) {
-  return(
-    <div className="submitItemBox">
-      <InputFrame inputSearchChange = {searchChange}/>
-      <Button onButtonSubmit={onButtonSubmit} search={search}/>
+      <input type="text"/>
+      <input type="button"/>
     </div>
   )
 }
 
-function ItemsSubmitted({items}) {
-
-
-  return(
-    <ol className="itemsSubmitted">
-      {items.map((item, index) => (
-        <li key={index}>{item}</li>
-      ))}
-    </ol>
+  return (
+    <div className="todo-container">
+      <h1>More React Practise</h1>
+      <MyInputBox />
+    </div>
   )
 }
-
-
-
-export default function App() {
-  const [search, setSearch] = useState("");
-  const [items, setItems] = useState([]);
-  
-function onButtonSubmit() {
-  setItems((items) => [...items, search])
-}
-  
-const onSearchChange = (event) => {
-    setSearch(event.target.value)
-  }
-
-  return(
-    <>
-      <Header />
-      <SubmitItemBox onButtonSubmit={onButtonSubmit} searchChange = {onSearchChange} search={search}/>
-      <ItemsSubmitted items = {items}/>
-    </>
-  ) 
-}
-
-
-// Det er onclick som skal utløse at den legger til et nytt item. Derfor må funksjonen passes ned til button. 
-// Staten kan være overordnet i appen sikkert. 
-// 
-
-
-
-
-//HVA HAR JEG LÆRT?
